@@ -1,0 +1,48 @@
+{% include "OMTBApp\header.html" %}
+
+
+
+<div  class="table" style="width: 100%;margin:20px;">
+    <table id="customers" style="width:100%;" cellpadding="10px">
+        <br/>
+        <br/>
+        <br/>
+        <h1 style="color: green; text-align:center;">Ticket Book</h1>
+        <br/>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Movie Name</th>
+                <th>Screen</th>
+                <th>Theater Name and Location</th>
+                <th>Show Date  </th>
+               <th> Show Time</th>
+                <th>Booking Date </th>
+                <th> Price</th>
+                
+               
+            </tr>
+        </thead>
+        <tbody style="font-size:18px;color:green">
+
+            {% for book in booklist %}
+            <tr align="center">
+                <td>{{book.bookingId}}</td>
+               
+                <td>{{request.session.customerDetails.custName}}</td>
+                <td>{{book.bookedShow.movie.movieName}}</td>
+                <td>{{book.bookedShow.screen}}</td>
+                <td>{{book.bookedShow.theaterNameLocation}}</td>
+                <td>{{book.bookedShow.showDate}} </td>
+                <td>{{book.bookedShow.showTime}} </td>
+                  <td>{{book.bookingDate}}</td> 
+                 <td> {{book.totalPrice}} Rs </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+{% include 'OMTBApp/footer.html' %}

@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+{% include "OMTBApp\header.html" %}
+
+<head>
+    <title>Customer Field</title>>
+</head>
+
+<body>
+    <div style="width:450px;margin:auto">
+        <fieldset>
+            <legend><i><b><h1>Sign Up</h1></b></i></legend>
+            <form action="/updatecust/{{updatecust.custId}}" method="POST">
+                {% csrf_token %}
+
+                <table cellpadding="7px" cellspacing="8px" align=center>
+                    <tr>
+                        <td>
+                            <Label>Customer Id: </Label>
+                        </td>
+                        <td><input type='text' name="custId" id="custId" class='validme' classholder="cust Id" value="{{updatecust.custId}}" required></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Label>Customer Name: </Label>
+                        </td>
+                        <td><input type='text' name="custName" id="custName" class='validme' value="{{updatecust.custName}}" classholder="cust Name" required></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Label>Customer EmailId: </Label>
+                        </td>
+                        <td><input type='text' name="custEmailId" id="custEmailId" class='validme' value="{{updatecust.custEmailId}}" classholder="cust EmailId"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>Password:</label>
+                        </td>
+                        <td>
+                            <input type="password" name="custPassword" id="custpassword" classholder="cust Password" value="{{updatecust.custPassword}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Contact No:</label>
+                        </td>
+                        <td>
+                            <input type="text" name="custContactNo" id="custContactNo" value="{{updatecust.custContactNo}}" classholder="cust ContactNo">
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <Label>Customer Address: </Label>
+                        </td>
+                        <td><textarea rows='4' cols='20' name='custAddress' id="custAddress">{{updatecust.custAddress}}</textarea></td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td><input type='submit' name='Add Customer' /></td>
+                        <td><input type="reset" name='Reset'></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            {{status}}
+                        </td>
+                    </tr>
+                </table>
+    </div>
+
+    </form>
+    </fieldset>
+</body>
+{% include "OMTBApp/footer.html" %}
+
+</html>

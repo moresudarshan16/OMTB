@@ -1,0 +1,51 @@
+{% include "OMTBApp/header.html" %}
+
+
+<div class="table" style="width: 100%;margin:30px auto;">
+    <table id="customers" style="width:100%;" cellpadding="10px">
+        <br/>
+        <br/>
+        <br/>
+        <h1 style="color: green; text-align:center;">Movies Show's</h1>
+        <br/>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Theater Location Name</th>
+                <th>Screen</th>
+                <th>Date</th>
+                <th>Show Time</th>
+                <th>Price</th>
+                <th>ACTION</th>
+
+            </tr>
+        </thead>
+        <tbody style="font-size:18px;color:green">
+
+            {% for show in movieshows %}
+            <tr align="center">
+                <td>{{show.showId}}</td>
+                <td>{{show.movie.movieName}}</td>
+                <td><img src="{{show.movie.movieImg.url}}" width="100px" height="100px" /></td>
+                <td>{{show.theaterNameLocation}}</td>
+                <td>{{show.screen}}</td>
+                <td>{{show.showDate}}</td>
+
+                <td>{{show.showTime}}</td>
+                <td>{{show.showPrice}}</td>
+                <td>
+                    {% if request.session.admin != None %}
+                    <a href="/deleteshow/{{show.showId}}">Delete</a>
+                    <a href="/updateshow/{{show.showId}}">Edit</a> {% endif %} {% if request.session.customer != None %}
+                    <a href="/bookShowSeats/{{show.showId}}">Book</a> {% endif %}
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+     
+    </table>
+</div>
+{% include 'OMTBApp/footer.html' %}

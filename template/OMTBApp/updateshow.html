@@ -1,0 +1,97 @@
+{% include "OMTBApp/header.html" %}
+<html>
+
+<head>
+    <title>Shows</title>
+</head>
+
+<body>
+    <div style="width:450px;margin:30px auto">
+        <fieldset>
+
+            <legend><i><b><h1>Edit shows</h1></b></i></legend>
+            <form action='/updateshow/{{show.showId}}' method="POST">
+                {% csrf_token %}
+
+                <table cellpadding="8px" cellspacing="10px" align=center style="font-size: 18px;">
+                    <tr>
+                        <td>
+                            <Label>ID: </Label>
+                        </td>
+                        <td><input type='text' name="showId" id="showId" class='validme' value="{{show.showId}}" classholder="Movie Id" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Select Movie:</label>
+
+                        </td>
+                        <td>
+                            <select name="movie">
+                            <option value="">select</option>
+                            {% for movie in movielist %}
+                            <option value="{{movie.movieId}}" {% if show.movie.movieId == movie.movieId %} selected {% endif %} >{{movie.movieName}}</option>
+                            {% endfor %}
+                        </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="left">
+                            <lable>Theater Name Location:</lable>
+                        </td>
+                        <td><input type="text" name="theaterNameLocation" placeholder="Theater Name Location" value="{{show.theaterNameLocation}}"> </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <lable>Screen : </lable>
+                        </td>
+                        <td><select name="screen">
+                            <option value="select">select</option>
+                            <option value="Screen 1" {% if show.screen == "Screen 1" %} selected {% endif %}>Screen 1</option>
+                            <option value="Screen 2" {% if show.screen == "Screen 2" %} selected {% endif %}>Screen 2</option>
+                            <option value="Screen 3" {% if show.screen == "Screen 3" %} selected {% endif %}>Screen 3</option>
+                            <option value="Screen 4" {% if show.screen == "Screen 4" %} selected {% endif %}>Screen 4</option>
+                        </select> </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <lable>Show Dates:</lable>
+                        </td>
+                        <td><input type="text" name="showDate" placeholder="show Date" value="{{show.showDate}}"> </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <lable>Show Time:</lable>
+                        </td>
+                        <td><input type="text" name="showTime" placeholder="Show Time" value="{{show.showTime}}"> </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <lable>Prices:</lable>
+                        </td>
+                        <td><input type="text" name="showPrice" placeholder="Prices" value="{{show.showPrice}}"> </td>
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td colspan="2" align="right"><input type='submit' name='update shows' /></td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            {{status}}
+                        </td>
+                    </tr>
+                </table>
+    </div>
+
+    </form>
+    </fieldset>
+</body>
+
+</html>
+
+<br/> {% include "OMTBApp/footer.html" %}

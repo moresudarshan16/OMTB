@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+{% include "OMTBApp/header.html" %}
+
+<head>
+    <title>Add Movie</title>>
+</head>
+
+<body>
+    <div style="width:450px;margin:30px auto">
+        <br/>
+        <br/>
+        <fieldset>
+            <br/>
+            <legend><i><b><h1  style="color: green; text-align:center; ">Add Movie Details</h1></b></i></legend>
+            <form action='addmovie' method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <table cellpadding="7px" cellspacing="8px" style="align:left;">
+                    <tr>
+                        <td>
+                            <Label>Name: </Label>
+                        </td>
+                        <td><input type='text' name="movieName" id="movieName" class='validme' classholder="Movie Name" required></td>
+                    </tr>
+                    <tr>
+                        <td> <label>Type: </label></td>
+                        <td><select name="movieType">
+<option value="select">Select</option>
+<option value="Action">Action</option>
+<option value="Horror">Horror</option>
+<option value="Romantic">Romantic</option>
+<option value="Drama">Drama</option>
+<option value="Thriller">Thriller</option>
+</tr>
+<tr><td> <label  >Language: </label></td>
+<td><select name="movieLanguage">
+<option value="select">Select</option>
+<option value="English">English</option>
+<option value="Hindi">Hindi</option>
+<option value="Marathi">Marathi</option>
+<option value="Gujrati">Gujrati</option>
+</tr>
+<tr>
+<td><Label >Cast: </Label></td>
+<td><textarea rows='4' cols='40' name='movieCast' ></textarea></td>
+</tr>
+<td><Label >Director: </Label></td>
+<td><input type='text' name = "movieDirector" id="movieDirector" class='validme' classholder="Movie Director"></td>
+</tr>
+<td><Label >Duration: </Label></td>
+<td><input type='text' name = "movieDuration" id="movieDuration" class='validme' classholder="Movie Duration"></td>
+</tr>
+<td><Label > Release Date: </Label></td>
+<td><input type='text' name = "movieReleaseDate" id="movieReleaseDate" class='validme' classholder="Movie ReleaseDate "></td>
+</tr>
+<tr>
+<td><label >Movie Image </label></td>
+<td><input type='file' id='img' name='movieImg' /></td>
+</tr>
+<tr>    
+    <td colspan="2" align="right" ><input type='submit'  name='Add Movie'/></td>
+    <td><input type="reset"  name='Reset'></td>
+    </tr>
+    <tr>
+<td colspan="2">
+  {{status}}
+</td>
+</tr>
+</table>
+</div>
+
+</form>
+</fieldset>
+</body>
+{% include "OMTBApp/footer.html" %}
+</html>

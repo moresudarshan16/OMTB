@@ -1,0 +1,165 @@
+<!DOCTYPE html> {% load static %}
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Book your Seats</title>
+    <link rel="stylesheet" type="text/css" href={% static "css/seatingcss.css" %} />
+    <script src="{% static 'js/jquery-1.4.2.min.js' %}"></script>
+
+
+    <script type="text/javascript">
+        allSelectedSeats = [] // array to store selected
+
+        $(function() {
+
+            $(".displayerBoxes").hide();
+
+            $(".btnConfirmselection").click(function() {
+
+                noOfSeats = $("input:checked").length;
+                if (noOfSeats > 0) {
+                    $("input:checked").each(function() {
+                        allSelectedSeats.push($(this).val())
+
+                    });
+                    $("#seatsDisplay").val(allSelectedSeats)
+                    showPrice = $("#showPrice").val()
+                    totalPrice = noOfSeats * showPrice
+                    $("#totalPrice").val(totalPrice)
+
+                } else {
+                    alert("please Selected Your Seats")
+                    return false;
+                }
+                $(".seatStructure").hide();
+                $(".displayerBoxes").show();
+
+            });
+        });
+    </script>
+    {% include "OMTBApp/header.html" %}
+
+    <body>
+        <div class="container">
+            <div class="seatStructure column" style="margin: 0px auto">
+                <table id="seatsBlock" align="center">
+                    <tr>
+                        <td colspan="14">
+                            <div class="screen">SCREEN</div>
+                        </td>
+                        <td rowspan="20" align="center">
+                            <div class="smallBox greenBox">Selected Seat</div> <br />
+                            <div class="smallBox redBox">Reserved Seat</div> <br />
+                            <div class="smallBox emptyBox">Empty Seat</div> <br />
+                        </td>
+                        <br/>
+                    </tr>
+                    <tr>
+                        <td> </td>  
+
+                        {% for col in "01234 56789" %} 
+                        {% if col in ' ' %}
+                        <td>&nbsp;</td>
+                        {% else %}
+                        <td>{{col}}</td>
+
+                        {% endif %} {% endfor %}
+                       
+                    </tr>
+
+                    {% for row in "ABCDEFG HIJKLMN" %}
+                    <tr>
+                        <td>{{row}}</td>
+                            {% for col in "01234 56789" %} 
+                                
+                                {% if col in ' ' or row in ' ' %}
+                                <td> &nbsp; </td>
+                                {% endif %}
+                                    {% if row not in ' ' and col not in ' ' %}
+                                        {% with row|add:col as seat %}
+                                            {% if seat in reserveSeats %}
+                                            
+                                                <td><div class="smallBox redBox"></div></td>
+                                                {% else %}
+                                  <td><input type="checkbox" class="seats" value="{{row}}{{col}}"></td>
+                            {% endif %}
+                            {% endwith %} 
+                         {% endif %}
+                         {% endfor %}
+                    </tr>
+                    {% endfor %}
+
+
+                    <tr>
+                        <td align="center" colspan="14"><button class="btnConfirmselection" style="margin: 5px;">Confirm Selection</button></td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="displayerBoxes column " style="margin-top: 50px;">
+                <form action="/bookTheShow" method="post">
+                    <input type="hidden" name="action" value="payment">
+                    <table class="Displaytable" align="center">
+                        {% csrf_token %}
+
+                        <tr>
+                            <th>customer name :</th>
+                            <td>{{request.session.customerDetails.custName}}</td>
+                        </tr>
+                        <tr>
+                            <th>Show Id :</th>
+                            <td><input type="text" id="showId" name="showId" value="{{show.showId}}" readonly="readonly"></td>
+                        </tr>
+                        <tr>
+                            <th>Movie :</th>
+                            <td><input type="text" id="showName" name="showName" value="{{show.movie.movieName}}" readonly="readonly"></td>
+                        </tr>
+                        <tr>
+                            <th>Theater:</th>
+                            <td><input type="text" id="theaterNameLocation" name="theaterNameLocation" value="{{show.theaterNameLocation}}" readonly="readonly"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Screen Play:</th>
+
+                            <td><input type="text" id="screen" name="screen" value="{{show.screen}}" readonly="readonly"></td>
+
+                        </tr>
+                        <tr>
+                            <th>Timeing:</th>
+
+                            <td><input type="text" id="showTime" name="showTime" value="{{show.showTime}}" readonly="readonly"></td>
+
+                        </tr>
+
+                        <tr>
+                            <th>Selected Seat:</th>
+                            <td><input type="text" id="seatsDisplay" name="bookedseats" readonly="readonly"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Total Pay:</th>
+                            <td>
+                                <input type="hidden" id="showPrice" name="showPrice" value="{{show.showPrice}}">
+                                <input id="totalPrice" name="totalPrice" readonly="readonly">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><input type="submit" value="Book Tickets" class="buybtn"></th>
+                        </tr>
+                    </table>
+                </form>
+                <div id="legend"></div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        {% include 'OMTBApp/footer.html' %}
+    </body>
+
+</html>

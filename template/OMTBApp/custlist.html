@@ -1,0 +1,48 @@
+{% include "OMTBApp\header.html" %}
+
+
+<div class="table" style="width: 100%;margin:20px;">
+    <table id="customers" action='custlist' style="width:100%; " cellpadding="10px ">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h1 style="color: green; text-align:center; ">Customer List</h1>
+        <br/>
+        <thead>
+            <tr style="font-size: 18px; ">
+                <th>ID</th>
+                <th>Name</th>
+                <th>EmailId</th>
+                <th>ContactNo</th>
+                <th>Address</th>
+
+                <th>ACTION</th>
+
+            </tr>
+        </thead>
+        <tbody style="font-size:14px;color:green ">
+
+            {% for customer in custlist %}
+            <tr align="center ">
+                <td>{{customer.custId}}</td>
+
+                <td>{{customer.custName}}</td>
+                <td>{{customer.custEmailId}}</td>
+                <td>{{customer.custContactNo}}</td>
+                <td>{{customer.custAddress}}</td>
+
+                <td >
+                    <a style="font-size:14px;color:red;" href="/deletecust/{{customer.custId}} ">Delete</a>
+                   
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
+<br/>
+
+<br/><br/>
+{% include 'OMTBApp/footer.html' %}

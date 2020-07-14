@@ -1,0 +1,57 @@
+{% load static %} {% include "OMTBApp\header.html" %}
+<br/>
+
+<legend>
+    <h1 style="color:green;">Login</h1>
+</legend>
+<table>
+    <form action="login" method="POST">
+        {% csrf_token %}
+
+
+        <tr>
+            <td>
+                <label><b>User Type</b></label>
+            </td>
+            <td>
+                <select name="usertype">
+
+        <option value="select">Select</option>
+        <option value="admin">Admin</option>
+        <option value="Customer">Customer</option>
+    </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <Label>Customer EmailId: </Label>
+            </td>
+            <td><input type='text' name="EmailId"></td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Password:</label>
+            </td>
+            <td>
+                <input type="password" name="Password">
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <a href="/forgetpassword">Forget Password</a>
+                <a href="/custfield">New Registration</a>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td colspan="2" align="right"><input type="submit" name="sign In"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {{status}}
+            </td>
+            </forms>
+</table>
+{% include "OMTBApp/footer.html" %}

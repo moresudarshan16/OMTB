@@ -1,0 +1,84 @@
+{}{% load static %}
+
+<!DOCTYPE html>
+<html>
+{% include "OMTBApp/header.html" %}
+
+<head>
+    <title>Add Movie</title>>
+</head>
+
+<body>
+    <div style="width:450px;margin:auto">
+        <fieldset>
+            <legend><i><b><h1>Add Movie Details</h1></b></i></legend>
+            <form action='/updatemovie/{{updatemovie.movieId}}' method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <table cellpadding="7px" cellspacing="8px" align=center>
+                    <tr>
+                        <td>
+                            <Label>ID: </Label>
+                        </td>
+                        <td><input type='text' name="movieId" id="movieId" class='validme' value="{{updatemovie.movieId}}" classholder="movie Id" required></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Label>Name: </Label>
+                        </td>
+                        <td><input type='text' name="movieName" id="movieName" class='validme' value="{{updatemovie.movieName}}" classholder="Movie Name" required></td>
+                    </tr>
+                    <tr>
+                        <td> <label>Type: </label></td>
+                        <td><select name="movieType">
+<option value="select">Select</option>
+<option value="Action" {% if updatemovie.movieType == 'Action' %}selected{% endif %}>Action</option>
+<option value="Horror" {% if updatemovie.movieType == 'Horror' %}selected{% endif %}>Horror</option>
+<option value="Romantic" {% if updatemovie.movieType == 'Romantic' %}selected{% endif %}>Romantic</option>
+<option value="Drama" {% if updatemovie.movieType == 'Drama' %}selected{% endif %} >Drama</option>
+<option value="Thriller" {% if updatemovie.movieType == 'Thriller' %}selected{% endif %}>Thriller</option>
+</tr>
+<tr><td> <label  >Language: </label></td>
+<td><select name="movieLanguage" value="{{updatemovie.movieLanguage}}">
+<option value="select">Select</option>
+<option value="English" {% if updatemovie.movieLanguage == 'English' %}selected{% endif %}>English</option>
+<option value="Hindi" {% if updatemovie.movieLanguage == 'Hindi' %}selected{% endif %}>Hindi</option>
+<option value="Marathi" {% if updatemovie.movieLanguage == 'Marathi' %}selected{% endif %}>Marathi</option>
+<option value="Gujrati" {% if updatemovie.movieLanguage == 'Gujrati' %}selected{% endif %}>Gujrati</option>
+</tr>
+<tr>
+<td><Label >Cast: </Label></td>
+<td><textarea rows='4' cols='40' name='movieCast'>{{updatemovie.movieCast}}</textarea></td>
+</tr>
+<td><Label >Director: </Label></td>
+<td><input type='text' name = "movieDirector"  value="{{updatemovie.movieDirector}}"  id="movieDirector" class='validme' classholder="Movie Director"></td>
+</tr>
+<td><Label >Duration: </Label></td>
+<td><input type='text' name = "movieDuration" id="movieDuration" class='validme'  value="{{updatemovie.movieDuration}}" classholder="Movie Duration"></td>
+</tr>
+<td><Label > Release Date: </Label></td>
+<td><input type='text' name = "movieReleaseDate" id="movieReleaseDate" value="{{updatemovie.movieReleaseDate}}" class='validme' classholder="Movie ReleaseDate "></td>
+</tr>
+<tr>
+<td><label >Movie Image </label></td>
+<td><input type='file' id='img' name='movieImg'>
+<br/>
+<img src="{{updatemovie.movieImg.url}}" width="100px" height="100px" ></td>
+</tr>
+<tr>    
+<td colspan="2" align="right"><input type='submit'  name='update Movie'/></td>
+
+</tr>
+<tr>
+<td colspan="5">
+  {{status}}
+</td>
+</tr>
+</table>
+</div>
+
+</form>
+</fieldset>
+</body>
+{% include "OMTBApp/footer.html" %}
+</html>

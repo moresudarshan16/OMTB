@@ -1,0 +1,52 @@
+{% load static %} 
+{% include "OMTBApp\header.html" %}
+<title>Enjoy Your Show</title>
+</head>
+
+<body>
+    <link href={% static "css/ticketcss.css" %} rel="stylesheet" type="text/css" />
+    <div class="cardWrap">
+        <h1>{{status}}</h1>
+        <div class="card cardLeft">
+            <h1>
+                Cinema <span>World</span>
+            </h1>
+            <div class="title">
+                <h2>Movie Name</h2>
+                <span>{{bookedShow.bookedShow.movie.movieName}}</span>
+            </div>
+            <div class="name">
+                <h2>Customer Full Name</h2>
+                <span>{{request.session.customerDetails.custName}}</span>
+            </div>
+            <div class="screen">
+                <h2>Screen Name</h2>
+                <span>{{bookedShow.bookedShow.screen}}</span>
+            </div>
+            <div class="theater">
+                <h2> Theatre Name, Theatre Location</h2>
+                <span> {{bookedShow.bookedShow.theaterNameLocation}}</span>
+            </div>
+            <div class="date">
+                <h2>Show Date and Time</h2>
+                <span> {{bookedShow.bookedShow.showDate}}  {{bookedShow.bookedShow.showTime}} </span>
+
+            </div>
+            <div class="time">
+                <h2>Booking Date and Price </h2>
+                <span> {{bookedShow.bookingDate}}  <b>&#837;  {{bookedShow.totalPrice}} </b></span>
+            </div>
+
+
+
+        </div>
+        <div class="card cardRight">
+            <div class="eye"></div>
+            <div class="number">
+                <h3 id="seat">Booking Seats</h3>
+                <span>{{bookedShow.bookedSeats}}</span>
+            </div>
+            <div class="barcode"></div>
+        </div>
+
+    </div>
